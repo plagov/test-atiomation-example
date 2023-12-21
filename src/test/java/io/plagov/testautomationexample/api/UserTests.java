@@ -2,6 +2,7 @@ package io.plagov.testautomationexample.api;
 
 import io.plagov.testautomationexample.model.CreateOrUpdateUserRequest;
 import io.plagov.testautomationexample.model.CreateUserResponse;
+import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
@@ -30,7 +31,8 @@ class UserTests extends ApiBaseTest {
                 .addHeader("Authorization", "Bearer %s".formatted(getApiAccessToken()))
                 .setContentType(ContentType.JSON)
                 .setBasePath("/v2/users")
-                .log(LogDetail.ALL)
+                .log(LogDetail.HEADERS)
+                .addFilter(new AllureRestAssured())
                 .build();
 
         responseSpec = new ResponseSpecBuilder()
