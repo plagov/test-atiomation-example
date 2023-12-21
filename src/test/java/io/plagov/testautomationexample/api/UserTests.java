@@ -72,6 +72,29 @@ class UserTests extends RestAssuredBaseConfig {
                 .isEqualTo(createUserResponse);
     }
 
+    @Test
+    void shouldDeleteExistingUser() {
+        var userId = Integer.MAX_VALUE;
+
+        given()
+                .spec(requestSpec)
+                .pathParam("userId", userId)
+                .when()
+                .delete("{userId}")
+                .then()
+                .spec(responseSpec)
+                .statusCode(204);
+
+        given()
+                .spec(requestSpec)
+                .pathParam("userId", userId)
+                .when()
+                .get("{userId}")
+                .then()
+                .spec(responseSpec)
+                .statusCode(404);
+    }
+
     private CreateUserRequest getCreateUserRequest() {
         var faker = new Faker(new Locale("en"));
         var person = faker.name();
