@@ -1,7 +1,7 @@
 package io.plagov.testautomationexample.api;
 
-import io.plagov.testautomationexample.model.CreateOrUpdateUserRequest;
-import io.plagov.testautomationexample.model.CreateUserResponse;
+import io.plagov.testautomationexample.api.model.CreateOrUpdateUserRequest;
+import io.plagov.testautomationexample.api.model.CreateUserResponse;
 import io.qameta.allure.restassured.AllureRestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -51,7 +51,7 @@ class UserTests extends ApiBaseTest {
         assertThat(getUserResponse)
                 .usingRecursiveComparison()
                 .ignoringFields("id")
-                .describedAs("Get user response not equal to create user response after user creation")
+                .describedAs("Get user response should be equal to create user response after user creation")
                 .isEqualTo(createUserResponse);
     }
 
