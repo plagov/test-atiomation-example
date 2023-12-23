@@ -9,15 +9,18 @@ repositories {
     }
 }
 
+val junitVersion = "5.10.1"
+val allureVersion = "2.25.0"
+
 dependencies {
-    api(libs.com.codeborne.selenide.appium)
-    api(libs.org.junit.jupiter.junit.jupiter.api)
-    api(libs.org.junit.jupiter.junit.jupiter.engine)
-    api(libs.io.rest.assured.rest.assured)
-    api(libs.org.assertj.assertj.core)
-    api(libs.net.datafaker.datafaker)
-    api(libs.io.qameta.allure.allure.junit5)
-    api(libs.io.qameta.allure.allure.rest.assured)
+    implementation("com.codeborne:selenide-appium:7.0.4")
+    implementation("org.junit.jupiter:junit-jupiter-api:$junitVersion")
+    implementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+    implementation("io.rest-assured:rest-assured:5.4.0")
+    implementation("org.assertj:assertj-core:3.24.2")
+    implementation("net.datafaker:datafaker:2.0.2")
+    implementation("io.qameta.allure:allure-junit5:$allureVersion")
+    implementation("io.qameta.allure:allure-rest-assured:$allureVersion")
 }
 
 group = "io.plagov"
