@@ -1,5 +1,5 @@
 plugins {
-    `java-library`
+    java
 }
 
 repositories {
@@ -29,5 +29,8 @@ description = "test-automation-example"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 tasks.withType<Test> {
-    useJUnitPlatform()
+    val includeTags = System.getProperty("includeTags")
+    useJUnitPlatform {
+        includeTags(includeTags)
+    }
 }

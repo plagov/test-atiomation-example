@@ -3,10 +3,12 @@ package io.plagov.testautomationexample.mobile;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Condition.textCaseSensitive;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import io.plagov.testautomationexample.mobile.pages.HomePage;
 
+@Tag("android-tests")
 public class MobileTests extends MobileBaseTest {
 
     private final HomePage homePage = new HomePage();

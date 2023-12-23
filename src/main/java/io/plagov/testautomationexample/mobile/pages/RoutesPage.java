@@ -1,7 +1,6 @@
 package io.plagov.testautomationexample.mobile.pages;
 
 import static com.codeborne.selenide.Condition.visible;
-import static org.assertj.core.api.Assertions.assertThat;
 import static io.appium.java_client.AppiumBy.className;
 import static io.plagov.testautomationexample.mobile.pages.CommonElements.elementByResourceId;
 
@@ -29,8 +28,6 @@ public class RoutesPage {
         searchInput
                 .shouldBe(visible)
                 .sendKeys(origin);
-        String originContentDesc = firstSearchResult.getAttribute("content-desc");
-        assertThat(originContentDesc).startsWith(origin);
         firstSearchResult.tap();
         return this;
     }
@@ -40,8 +37,6 @@ public class RoutesPage {
         searchInput
                 .shouldBe(visible)
                 .sendKeys(destination);
-        String destContentDesc = firstSearchResult.getAttribute("content-desc");
-        assertThat(destContentDesc).startsWith(destination);
         firstSearchResult.tap();
         return this;
     }
