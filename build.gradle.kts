@@ -43,9 +43,12 @@ description = "test-automation-example"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
 tasks.withType<Test> {
+    dependsOn("clean")
     val includeTags = System.getProperty("includeTags")
     useJUnitPlatform {
-        includeTags(includeTags)
+        if (!includeTags.isNullOrBlank()) {
+            includeTags(includeTags)
+        }
     }
     jvmArgs = listOf("-javaagent:${agent.singleFile}")
 }

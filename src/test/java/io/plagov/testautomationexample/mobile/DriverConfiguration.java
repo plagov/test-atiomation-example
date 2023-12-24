@@ -5,6 +5,7 @@ import com.codeborne.selenide.WebDriverProvider;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.Duration;
@@ -32,12 +33,20 @@ public class DriverConfiguration implements WebDriverProvider {
         options.setFullReset(false);
         options.autoGrantPermissions();
         options.setAppPackage("fi.hsl.app");
-        options.setApp("/home/vplagov/projects/test-automation-example/src/test/resources/hsl.apk");
+        options.setApp(getApp().getAbsolutePath());
 
         try {
             return new AndroidDriver(new URL("http://127.0.0.1:4723"), options);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private File getApp() {
+        URL apk = Thread.currentThread().getContextClassLoader().getResource("hsl.apk");
+        if (apk == null) {
+            throw new RuntimeException("APK file is not found under resources");
+        }
+        return new File(apk.getFile());
     }
 }
