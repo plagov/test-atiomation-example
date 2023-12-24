@@ -1,16 +1,28 @@
 plugins {
     java
+    id("io.qameta.allure") version "2.11.2"
 }
 
 repositories {
     mavenLocal()
-    maven {
-        url = uri("https://repo.maven.apache.org/maven2/")
-    }
+    mavenCentral()
 }
 
 val junitVersion = "5.10.1"
 val allureVersion = "2.25.0"
+val aspectJVersion = "1.9.20.1"
+
+val agent: Configuration by configurations.creating {
+    isCanBeConsumed = true
+    isCanBeResolved = true
+}
+
+allure {
+    adapter {
+        allureJavaVersion.set(allureVersion)
+        aspectjWeaver.set(true)
+    }
+}
 
 dependencies {
     implementation("com.codeborne:selenide-appium:7.0.4")
@@ -21,6 +33,8 @@ dependencies {
     implementation("net.datafaker:datafaker:2.0.2")
     implementation("io.qameta.allure:allure-junit5:$allureVersion")
     implementation("io.qameta.allure:allure-rest-assured:$allureVersion")
+    implementation("io.qameta.allure:allure-selenide:$allureVersion")
+    agent("org.aspectj:aspectjweaver:${aspectJVersion}")
 }
 
 group = "io.plagov"
@@ -33,4 +47,5 @@ tasks.withType<Test> {
     useJUnitPlatform {
         includeTags(includeTags)
     }
+    jvmArgs = listOf("-javaagent:${agent.singleFile}")
 }
